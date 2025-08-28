@@ -1,39 +1,95 @@
 #include <Arduino.h>
-#include <DHTesp.h> // Memanggil library DHT yang sudah diinstal
+#include <DHTesp.h>
+#include <WiFi.h>
+#include <HTTPClient.h>
+#include <ArduinoJson.h> // Library untuk membuat format JSON
 
-// Atur pin mana di ESP32 yang terhubung ke sensor DHT.
-// Ganti angka 4 jika Anda menggunakan pin lain!
+// --- [ WAJIB DIUBAH ] ---
+const char* WIFI_SSID = "ITS-WIFI-TW2";
+const char* WIFI_PASSWORD = "itssurabaya";
+// Ganti dengan IP Address komputer Anda, bukan localhost
+const char* SERVER_ADDRESS = "http://10.4.65.3:8000/api/sensor-readings"; 
+// -------------------------
+
+// --- Konfigurasi Pin ---
 const int DHT_PIN = 4;
+const int PIR_PIN = 5;
 
-// Buat sebuah objek sensor
+// --- Membuat Objek Sensor & Klien HTTP ---
 DHTesp dht;
+HTTPClient http;
+
+// --- Variabel untuk Timer ---
+unsigned long previousSensorMillis = 0;
+const long sensorInterval = 5000; // Kirim data setiap 5 detik
 
 void setup() {
-  // Fungsi ini berjalan sekali saat ESP32 pertama kali nyala
-
-  // Mulai komunikasi ke komputer untuk menampilkan tulisan
   Serial.begin(115200);
 
-  // Siapkan sensornya
+  // Inisialisasi Sensor
   dht.setup(DHT_PIN, DHTesp::DHT22);
-  Serial.println("Setup selesai. Mulai membaca sensor...");
+  pinMode(PIR_PIN, INPUT);
+
+  // Koneksi ke Wi-Fi
+  Serial.print("Menghubungkan ke Wi-Fi: ");
+  Serial.println(WIFI_SSID);
+  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+  Serial.println("\nWi-Fi terhubung!");
+  Serial.print("Alamat IP ESP32: ");
+  Serial.println(WiFi.localIP());
 }
 
 void loop() {
-  // Fungsi ini berjalan berulang-ulang selamanya
+  unsigned long currentMillis = millis();
 
-  // Tunggu 2 detik sebelum membaca lagi
-  delay(2000);
+  // Cek apakah sudah waktunya mengirim data
+  if (currentMillis - previousSensorMillis >= sensorInterval) {
+    previousSensorMillis = currentMillis;
 
-  // Ambil data suhu dan kelembapan
-  float temperature = dht.getTemperature();
-  float humidity = dht.getHumidity();
+    // Baca semua sensor
+    float temperature = dht.getTemperature();
+    float humidity = dht.getHumidity();
+    bool motionDetected = digitalRead(PIR_PIN);
 
-  // Tampilkan hasilnya ke layar komputer
-  Serial.print("Suhu: ");
-  Serial.print(temperature);
-  Serial.print(" °C\t"); // \t adalah karakter tab untuk spasi
-  Serial.print("Kelembapan: ");
-  Serial.print(humidity);
-  Serial.println(" %");
+    // Cek jika pembacaan DHT gagal (misal: sensor belum terpasang)
+    if (isnan(temperature) || isnan(humidity)) {
+      Serial.println("Gagal membaca sensor DHT!");
+      return; // Lewati pengiriman data jika bacaan tidak valid
+    }
+
+    // Siapkan data dalam format JSON
+    JsonDocument doc; // Gunakan JsonDocument untuk ArduinoJson v7+
+    doc["temperature"] = temperature;
+    doc["humidity"] = humidity;
+    doc["motion_detected"] = motionDetected;
+
+    String jsonPayload;
+    serializeJson(doc, jsonPayload);
+
+    // Kirim data ke server Laravel
+    Serial.print("Mengirim data ke server: ");
+    Serial.println(jsonPayload);
+
+    http.begin(SERVER_ADDRESS);
+    http.addHeader("Content-Type", "application/json");
+
+    int httpResponseCode = http.POST(jsonPayload);
+
+    if (httpResponseCode > 0) {
+      Serial.print("Kode Respons HTTP: ");
+      Serial.println(httpResponseCode);
+      String responsePayload = http.getString();
+      Serial.print("Respons Server: ");
+      Serial.println(responsePayload);
+    } else {
+      Serial.print("Error saat mengirim POST, kode: ");
+      Serial.println(httpResponseCode);
+    }
+    
+    http.end();
+  }
 }
