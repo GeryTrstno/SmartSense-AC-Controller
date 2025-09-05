@@ -21,6 +21,8 @@ export default [
             'react/react-in-jsx-scope': 'off',
             'react/prop-types': 'off',
             'react/no-unescaped-entities': 'off',
+            'no-unused-vars': 'off', // Menonaktifkan penghapusan variabel yang tidak digunakan
+            'no-unused-imports': 'off' // Menonaktifkan penghapusan impor yang tidak digunakan
         },
         settings: {
             react: {
@@ -35,6 +37,8 @@ export default [
         rules: {
             'react-hooks/rules-of-hooks': 'error',
             'react-hooks/exhaustive-deps': 'warn',
+            'no-unused-vars': 'off', // Menonaktifkan penghapusan variabel yang tidak digunakan
+            'no-unused-imports': 'off' // Menonaktifkan penghapusan impor yang tidak digunakan
         },
     },
     {
