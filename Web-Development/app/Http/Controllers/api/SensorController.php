@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Sensor;
+use App\Events\NewSensorReading;
 use Illuminate\Http\Request;
 
 class SensorController extends Controller
@@ -36,6 +37,8 @@ class SensorController extends Controller
         ]);
 
         $sensor = Sensor::Create($validated);
+
+        event(new NewSensorReading($sensor));
 
         return response()->json([
             'message' => 'Sensor data stored successfully',
