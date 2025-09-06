@@ -20,7 +20,7 @@ export default function DashboardCards({ latestReading }: DashboardCardsProps) {
   return (
     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
       {/* Card untuk Suhu */}
-      <Card className='bg-muted transition-all duration-300 hover:scale-103 hover:shadow-lg cursor-pointer'>
+      <Card className='bg-gradient-to-br from-muted/50 to-muted transition-all duration-300 hover:scale-103 hover:shadow-lg cursor-pointer shadow-lg shadow-muted/50'>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-lg font-medium">Temperature</CardTitle>
           <Thermometer className="h-6 w-6 text-blue-500" />
@@ -34,7 +34,7 @@ export default function DashboardCards({ latestReading }: DashboardCardsProps) {
       </Card>
 
       {/* Card untuk Kelembapan */}
-      <Card className='bg-muted transition-all duration-300 hover:scale-103 hover:shadow-lg cursor-pointer'>
+      <Card className='bg-gradient-to-br from-muted/50 to-muted transition-all duration-300 hover:scale-103 hover:shadow-lg cursor-pointer shadow-lg shadow-muted/50'>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-lg font-medium">Humidity</CardTitle>
           <Droplets className="h-6 w-6 text-blue-500" />
@@ -48,7 +48,7 @@ export default function DashboardCards({ latestReading }: DashboardCardsProps) {
       </Card>
 
       {/* Card untuk Gerakan */}
-      <Card className='bg-muted transition-all duration-300 hover:scale-103 hover:shadow-lg cursor-pointer'>
+      <Card className='bg-gradient-to-br from-muted/50 to-muted transition-all duration-300 hover:scale-103 hover:shadow-lg cursor-pointer shadow-lg shadow-muted/50'>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-lg font-medium">Motion Status</CardTitle>
           <Activity className="h-6 w-6 text-blue-500" />

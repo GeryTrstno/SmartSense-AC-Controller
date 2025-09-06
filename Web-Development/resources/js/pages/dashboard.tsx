@@ -1,9 +1,10 @@
+import DashboardCards from '@/components/dashboard-cards';
+import WelcomeBanner from '@/components/welcome-banner';
 import AppLayout from '@/layouts/app-layout';
 import { dashboard } from '@/routes';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
 import { useState } from 'react';
-import DashboardCards from '@/components/dashboard-cards';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -35,20 +36,21 @@ export default function Dashboard({ latestreading, historicalData }: DashboardPr
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Dashboard" />
             <div className="flex h-full flex-1 flex-col gap-6 overflow-x-auto rounded-xl p-6">
-                        <DashboardCards
-                            latestReading={
-                                latestreading
-                                    ? {
-                                        ...latestreading,
-                                        temperature: (latestreading as any).temperature ?? 0,
-                                        humidity: (latestreading as any).humidity ?? 0,
-                                        motion_detected: (latestreading as any).motion_detected ?? false,
-                                    }
-                                    : null
-                            }
-                        />
+                <WelcomeBanner />
+                <DashboardCards
+                    latestReading={
+                        latestreading
+                            ? {
+                                  ...latestreading,
+                                  temperature: (latestreading as any).temperature ?? 0,
+                                  humidity: (latestreading as any).humidity ?? 0,
+                                  motion_detected: (latestreading as any).motion_detected ?? false,
+                              }
+                            : null
+                    }
+                />
 
-                <div className="relative min-h-[100vh] flex-1 overflow-hidden rounded-xl border border-sidebar-border/70 bg-sidebar md:min-h-min dark:border-sidebar-border"></div>
+                <div className="relative min-h-[100vh] flex-1 overflow-hidden rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border bg-muted"></div>
             </div>
         </AppLayout>
     );
