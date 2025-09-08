@@ -15,8 +15,11 @@ const breadcrumbs: BreadcrumbItem[] = [
 
 type Reading = {
     id: number;
-    value: number;
+    temperature: number;
+    humidity: number;
+    motion_detected: boolean;
     created_at: string;
+
 };
 
 interface DashboardProps {
@@ -47,12 +50,12 @@ export default function Dashboard({ latestreading: initialLatestReading, histori
     const [latestReading, setLatestReading] = useState<Reading | null>(initialLatestReading);
 
     useEffect(() => {
-        console.log('Inisialisasi WebSocket...');
+        // console.log('Inisialisasi WebSocket...');
         if (window.Echo) {
-            console.log('Mendengarkan channel WebSocket untuk data sensor...');
+            // console.log('Mendengarkan channel WebSocket untuk data sensor...');
             window.Echo.channel('sensor-data')
                 .listen('NewSensorReading', (event:  Reading ) => {
-                    console.log('Data baru diterima via WebSocket:', event);
+                    // console.log('Data baru diterima via WebSocket:', event);
 
                     // --- PERBAIKAN #1: UPDATE STATE ---
                     // Perbarui state dengan data baru yang diterima dari Reverb.
@@ -68,9 +71,11 @@ export default function Dashboard({ latestreading: initialLatestReading, histori
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Dashboard" />
             <div className="flex h-full flex-1 flex-col gap-6 p-4 md:p-6">
-                <div>
-                    <h1>{ latestReading.id }</h1>
-                </div>
+                {latestReading && (
+                    <div className="mb-4 text-lg font-semibold">
+                        Data ID: {latestReading.id}
+                    </div>
+                )}
                 <WelcomeBanner />
 
                 {/* --- PERBAIKAN #2: GUNAKAN STATE --- */}
