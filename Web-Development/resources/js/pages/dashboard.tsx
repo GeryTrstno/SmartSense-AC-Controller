@@ -1,5 +1,6 @@
 import DashboardCards from '@/components/dashboard-cards';
 import WelcomeBanner from '@/components/welcome-banner';
+import { DashboardChart } from '@/components/dashboard-chart';
 import AppLayout from '@/layouts/app-layout';
 import { dashboard } from '@/routes';
 import { type BreadcrumbItem } from '@/types';
@@ -37,14 +38,6 @@ declare global {
     }
 }
 
-interface SensorEventPayload {
-    id: number;
-    temperature: number;
-    humidity: number;
-    motion_detected: boolean;
-    created_at: string;
-}
-
 export default function Dashboard({ latestreading: initialLatestReading, historicalData }: DashboardProps) {
     // 1. Buat state untuk menampung data terbaru. Diinisialisasi dengan data dari server.
     const [latestReading, setLatestReading] = useState<Reading | null>(initialLatestReading);
@@ -54,7 +47,7 @@ export default function Dashboard({ latestreading: initialLatestReading, histori
         if (window.Echo) {
             // console.log('Mendengarkan channel WebSocket untuk data sensor...');
             window.Echo.channel('sensor-data')
-                .listen('NewSensorReading', (event:  Reading ) => {
+                .listen('NewSensorReading', (event: Reading) => {
                     // console.log('Data baru diterima via WebSocket:', event);
 
                     // --- PERBAIKAN #1: UPDATE STATE ---
@@ -82,8 +75,8 @@ export default function Dashboard({ latestreading: initialLatestReading, histori
                 {/* Berikan STATE 'latestReading' ke komponen anak, bukan props awal. */}
                 <DashboardCards latestReading={latestReading} />
 
-                <div className="relative min-h-[100vh] flex-1 overflow-hidden rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border bg-muted"></div>
-                    {/* Area Grafik Anda */}
+                <DashboardChart />
+
             </div>
         </AppLayout>
     );
