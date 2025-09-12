@@ -3,7 +3,7 @@ import WelcomeBanner from '@/components/welcome-banner';
 import { DashboardChart } from '@/components/dashboard-chart';
 import AppLayout from '@/layouts/app-layout';
 import { dashboard } from '@/routes';
-import { type BreadcrumbItem } from '@/types';
+import { type BreadcrumbItem, type Reading, type HistoricalData } from '@/types';
 import { Head } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 
@@ -14,23 +14,10 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
-type Reading = {
-    id: number;
-    temperature: number;
-    humidity: number;
-    motion_detected: boolean;
-    created_at: string;
-
-};
-
 interface DashboardProps {
     latestreading: Reading | null;
     historicalData: HistoricalData;
 }
-
-type HistoricalData = {
-    [key: string]: Reading[];
-};
 
 declare global {
     interface Window {

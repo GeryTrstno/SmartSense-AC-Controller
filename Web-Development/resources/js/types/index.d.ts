@@ -40,3 +40,24 @@ export interface User {
     updated_at: string;
     [key: string]: unknown; // This allows for additional properties...
 }
+
+export type Reading = {
+    id: number;
+    temperature: number;
+    humidity: number;
+    motion_detected: boolean;
+    created_at: string;
+};
+
+export type HistoricalData = {
+    hourly: Reading[];
+    daily: Reading[];
+    weekly: Reading[];
+    monthly?: Reading[]; // Tambahkan '?' jika 'monthly' mungkin tidak ada
+};
+
+export type HistoricalData = {
+    [key: string]: Reading[];
+};
+
+// export type Timespan = keyof HistoricalData;
