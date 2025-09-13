@@ -1,6 +1,6 @@
 import DashboardCards from '@/components/dashboard-cards';
 import WelcomeBanner from '@/components/welcome-banner';
-import { DashboardChart } from '@/components/dashboard-chart';
+import DashboardChart from '@/components/dashboard-chart';
 import AppLayout from '@/layouts/app-layout';
 import { dashboard } from '@/routes';
 import { type BreadcrumbItem, type Reading, type HistoricalData } from '@/types';
@@ -62,7 +62,7 @@ export default function Dashboard({ latestreading: initialLatestReading, histori
                 {/* Berikan STATE 'latestReading' ke komponen anak, bukan props awal. */}
                 <DashboardCards latestReading={latestReading} />
 
-                <DashboardChart />
+                <DashboardChart historicalData={historicalData}/>
 
             </div>
         </AppLayout>

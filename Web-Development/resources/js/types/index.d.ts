@@ -49,12 +49,15 @@ export type Reading = {
     created_at: string;
 };
 
-export type HistoricalData = {
-    hourly: Reading[];
-    daily: Reading[];
-    weekly: Reading[];
-    monthly?: Reading[]; // Tambahkan '?' jika 'monthly' mungkin tidak ada
-};
+export type Timespan = 'hourly' | 'daily' | 'weekly' | 'monthly';
+
+
+// export type HistoricalData = {
+//     hourly: Reading[];
+//     daily: Reading[];
+//     weekly: Reading[];
+//     monthly?: Reading[]; // Tambahkan '?' jika 'monthly' mungkin tidak ada
+// };
 
 export type HistoricalData = {
     [key: string]: Reading[];
