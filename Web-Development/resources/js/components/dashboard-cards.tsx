@@ -28,7 +28,7 @@ export default function DashboardCards({ latestReading }: DashboardCardsProps) {
                 <CardContent>
                     <div className="text-2xl font-bold">{temp}°C</div>
                     <p className="text-xs text-muted-foreground">
-                        Suhu ruangan saat ini
+                        Current room temperature
                     </p>
                 </CardContent>
             </Card>
@@ -42,7 +42,7 @@ export default function DashboardCards({ latestReading }: DashboardCardsProps) {
                 <CardContent>
                     <div className="text-2xl font-bold">{humidity}%</div>
                     <p className="text-xs text-muted-foreground">
-                        Tingkat kelembapan udara
+                        Current room humidity
                     </p>
                 </CardContent>
             </Card>
@@ -56,7 +56,7 @@ export default function DashboardCards({ latestReading }: DashboardCardsProps) {
                 <CardContent>
                     <div className="text-2xl font-bold">{motion}</div>
                     <p className="text-xs text-muted-foreground">
-                        Deteksi gerakan di dalam ruangan
+                        Latest motion detection status
                     </p>
                 </CardContent>
             </Card>

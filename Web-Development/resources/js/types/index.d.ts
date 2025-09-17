@@ -63,4 +63,19 @@ export type HistoricalData = {
     [key: string]: Reading[];
 };
 
-// export type Timespan = keyof HistoricalData;
+export type PaginatedLink = {
+    url: string | null;
+    label: string;
+    active: boolean;
+};
+
+// Tipe untuk objek paginasi dari Laravel
+export type PaginatedData<T> = {
+    data: Reading[];
+    links: PaginatedLink[];
+    current_page: number;
+    last_page: number;
+    per_page: number;
+    total: number;
+    // ... properti paginasi lainnya jika dibutuhkan
+};

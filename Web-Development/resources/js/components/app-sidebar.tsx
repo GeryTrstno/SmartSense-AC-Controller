@@ -2,10 +2,10 @@ import { NavFooter } from '@/components/nav-footer';
 import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
-import { dashboard, control} from '@/routes';
+import { dashboard, control, analytics} from '@/routes';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, Gauge, SlidersHorizontal } from 'lucide-react';
+import { BookOpen, Folder, Gauge, SlidersHorizontal, ChartColumn } from 'lucide-react';
 import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [
@@ -18,6 +18,11 @@ const mainNavItems: NavItem[] = [
         title: 'Control',
         href: control(),
         icon: SlidersHorizontal,
+    },
+    {
+        title: 'Analytics',
+        href: analytics(),
+        icon: ChartColumn,
     }
 ];
 
