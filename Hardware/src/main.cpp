@@ -5,10 +5,10 @@
 #include <ArduinoJson.h> // Library untuk membuat format JSON
 
 // --- [ WAJIB DIUBAH ] ---
-const char* WIFI_SSID = "Gery";
-const char* WIFI_PASSWORD = "xxxxxxxx";
+const char* WIFI_SSID = "Afdhol 17";
+const char* WIFI_PASSWORD = "#Premium17";
 // Ganti dengan IP Address komputer Anda, bukan localhost
-const char* SERVER_ADDRESS = "http://xxx.xx.xx.x:8000/api/sensor-readings"; 
+const char* SERVER_ADDRESS = "http://192.168.18.194:8000/api/sensor-readings"; 
 // -------------------------
 
 // --- Konfigurasi Pin ---

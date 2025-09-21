@@ -13,7 +13,9 @@ class AnalyticsController extends Controller
      */
     public function index()
     {
-        $sensorData = Sensor::latest()->paginate(25);
+        $sensorData = Sensor::oldest()->paginate(25);
+
+        // dd($sensorData);
 
         return inertia::render('analytics', [
             'sensorData' => $sensorData,

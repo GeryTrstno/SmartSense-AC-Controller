@@ -51,11 +51,6 @@ export default function Dashboard({ latestreading: initialLatestReading, histori
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Dashboard" />
             <div className="flex h-full flex-1 flex-col gap-6 p-4 md:p-6">
-                {/* {latestReading && (
-                    <div className="mb-4 text-lg font-semibold">
-                        Data ID: {latestReading.id}
-                    </div>
-                )} */}
                 <WelcomeBanner />
 
                 {/* --- PERBAIKAN #2: GUNAKAN STATE --- */}
