@@ -124,9 +124,12 @@ export default function DashboardChart({ historicalData }: DashboardChartProps) 
                                     <ChartTooltipContent
                                         indicator="dot"
                                         labelFormatter={(value) => {
-                                            // Konversi string tanggal menjadi objek Date
-                                            // lalu format ke Jam:Menit:Detik
-                                            return new Date(value).toLocaleTimeString('id-ID', {
+                                            return new Date(value).toLocaleString('id-ID', {
+                                                // Opsi untuk Tanggal
+                                                day: '2-digit',
+                                                month: 'short',
+                                                year: 'numeric',
+                                                // Opsi untuk Waktu
                                                 hour: '2-digit',
                                                 minute: '2-digit',
                                                 second: '2-digit',
