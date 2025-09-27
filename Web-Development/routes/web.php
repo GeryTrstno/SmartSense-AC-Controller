@@ -4,6 +4,7 @@ use App\Http\Controllers\AnalyticsController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\OnOffController;
 
 Route::get('/', function () {
     return Inertia::render('welcome');
@@ -17,6 +18,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('control');
 
     Route::get('analytics', [AnalyticsController::class, 'index'])->name('analytics');
+
+    Route::get('testing', function () {
+        return Inertia::render('testing');
+    })->name('testing');
+
+    Route::post('control/send-command', [OnOffController::class, 'sendCommand'])->name('control.sendCommand');
 });
 
 require __DIR__ . '/settings.php';
