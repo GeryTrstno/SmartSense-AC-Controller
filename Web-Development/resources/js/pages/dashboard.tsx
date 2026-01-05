@@ -21,24 +21,17 @@ interface DashboardProps {
 
 declare global {
     interface Window {
-        Echo: any; // You can be more specific here if you want to use the actual type
+        Echo: any;
     }
 }
 
 export default function Dashboard({ latestreading: initialLatestReading, historicalData }: DashboardProps) {
-    // 1. Buat state untuk menampung data terbaru. Diinisialisasi dengan data dari server.
     const [latestReading, setLatestReading] = useState<Reading | null>(initialLatestReading);
 
     useEffect(() => {
-        // console.log('Inisialisasi WebSocket...');
         if (window.Echo) {
-            // console.log('Mendengarkan channel WebSocket untuk data sensor...');
             window.Echo.channel('sensor-data')
                 .listen('NewSensorReading', (event: Reading) => {
-                    // console.log('Data baru diterima via WebSocket:', event);
-
-                    // --- PERBAIKAN #1: UPDATE STATE ---
-                    // Perbarui state dengan data baru yang diterima dari Reverb.
                     setLatestReading(event);
                 });
 
@@ -46,19 +39,22 @@ export default function Dashboard({ latestreading: initialLatestReading, histori
                 window.Echo.leaveChannel('sensor-data');
             };
         }
-    }, []); // Array kosong memastikan ini hanya berjalan sekali
+    }, []);
+
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Dashboard" />
-            <div className="flex h-full flex-1 flex-col gap-6 p-4 md:p-6">
+            <Head title="Sensor Monitor" />
+            {/* Latar belakang monokrom yang bersih */}
+            <div className="flex h-full flex-1 flex-col gap-8 p-6 bg-slate-50/50 dark:bg-slate-950">
                 <WelcomeBanner />
 
-                {/* --- PERBAIKAN #2: GUNAKAN STATE --- */}
-                {/* Berikan STATE 'latestReading' ke komponen anak, bukan props awal. */}
-                <DashboardCards latestReading={latestReading} />
-
-                <DashboardChart historicalData={historicalData}/>
-
+                <section className="flex flex-col gap-8">
+                    {/* Status Utama */}
+                    <DashboardCards latestReading={latestReading} />
+                    
+                    {/* Visualisasi Data */}
+                    <DashboardChart historicalData={historicalData}/>
+                </section>
             </div>
         </AppLayout>
     );
