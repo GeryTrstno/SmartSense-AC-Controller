@@ -13,9 +13,8 @@ export default function Register() {
         <div className="flex min-h-screen w-full bg-slate-50 dark:bg-slate-950">
             <Head title="Register - SmartSense" />
 
-            {/* --- SISI KIRI: BRANDING & INFO (Hidden on Mobile) --- */}
             <div className="relative hidden w-1/2 flex-col justify-between bg-blue-600 p-12 text-white lg:flex">
-                {/* Background Pattern Halus */}
+                
                 <div className="absolute inset-0 opacity-10 pointer-events-none">
                     <svg width="100%" height="100%"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" strokeWidth="1"/></pattern></defs><rect width="100%" height="100%" fill="url(#grid)" /></svg>
                 </div>
@@ -46,10 +45,9 @@ export default function Register() {
                 </div>
             </div>
 
-            {/* --- SISI KANAN: FORM PENDAFTARAN --- */}
             <div className="flex w-full flex-col items-center justify-center p-8 lg:w-1/2 md:p-16">
                 <div className="w-full max-w-md space-y-8">
-                    {/* Header Mobile Only */}
+                    
                     <div className="flex flex-col gap-2 lg:hidden">
                         <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-600 text-white mb-2">
                             <Cpu className="h-6 w-6" />
@@ -71,7 +69,7 @@ export default function Register() {
                         {({ processing, errors }) => (
                             <>
                                 <div className="space-y-4">
-                                    {/* Name Field */}
+                                    
                                     <div className="grid gap-2">
                                         <Label htmlFor="name" className="text-xs font-bold uppercase tracking-widest text-slate-500">Full Name</Label>
                                         <div className="group relative">
@@ -85,7 +83,6 @@ export default function Register() {
                                         <InputError message={errors.name} />
                                     </div>
 
-                                    {/* Email Field */}
                                     <div className="grid gap-2">
                                         <Label htmlFor="email" className="text-xs font-bold uppercase tracking-widest text-slate-500">Email address</Label>
                                         <div className="group relative">
@@ -99,7 +96,6 @@ export default function Register() {
                                         <InputError message={errors.email} />
                                     </div>
 
-                                    {/* Password Field */}
                                     <div className="grid gap-2">
                                         <Label htmlFor="password" className="text-xs font-bold uppercase tracking-widest text-slate-500">Secure Password</Label>
                                         <div className="group relative">
@@ -113,7 +109,6 @@ export default function Register() {
                                         <InputError message={errors.password} />
                                     </div>
 
-                                    {/* Confirm Password */}
                                     <div className="grid gap-2">
                                         <Label htmlFor="password_confirmation" className="text-xs font-bold uppercase tracking-widest text-slate-500">Verify Password</Label>
                                         <div className="group relative">
