@@ -6,9 +6,9 @@
 #include <IRsend.h>
 
 // --- KONFIGURASI ---
-const char *WIFI_SSID = "Afdhol 17";
-const char *WIFI_PASSWORD = "#Premium17";
-const char *SERVER_GET_COMMAND_URL = "http://192.168.18.194:8000/api/control/command/latest";
+const char *WIFI_SSID = "ID";
+const char *WIFI_PASSWORD = "PASSWORD";
+const char *SERVER_GET_COMMAND_URL = "http:localhost:8000/api/control/command/latest";
 const uint16_t kIrLedPin = 4;
 
 // --- OBJEK ---
