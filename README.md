@@ -5,7 +5,7 @@
 
 ## 📖 Tentang Proyek
 
-**SmartSense** adalah platform IoT terintegrasi yang dirancang untuk pemantauan lingkungan presisi tinggi dan kontrol AC dari jarak jauh. Proyek ini dibangun sebagai penunjang portofolio, memadukan ekosistem Laravel modern dengan perangkat keras berbasis ESP32.
+**SmartSense** adalah platform IoT terintegrasi yang dirancang untuk pemantauan lingkungan presisi tinggi dan kontrol perangkat keras jarak jauh. Proyek ini dibangun sebagai bagian dari tugas akhir Teknik Komputer, memadukan ekosistem Laravel modern dengan perangkat keras berbasis ESP32.
 
 > "Monitor. Automate. Control Everything."
 
@@ -67,7 +67,7 @@ Ikuti langkah ini untuk menjalankan proyek di komputer lokal kamu (Localhost).
 1.  **Clone Repository**
     ```bash
     git clone https://github.com/GeryTrstno/SmartSense-AC-Controller.git
-    cd AC-Controller
+    cd SmartSense-AC-Controller
     ```
 
 2.  **Install Dependencies**
@@ -97,7 +97,13 @@ Ikuti langkah ini untuk menjalankan proyek di komputer lokal kamu (Localhost).
     php artisan migrate
     ```
 
-5.  **Run Development Server**
+5.  **Setup WebSocket**
+    ```bash
+    # Install Reverb
+    php artisan reverb:install
+    ```
+
+6.  **Run Development Server**
     Buka dua terminal terpisah:
     ```bash
     # Terminal 1 (Backend)
@@ -105,14 +111,16 @@ Ikuti langkah ini untuk menjalankan proyek di komputer lokal kamu (Localhost).
 
     # Terminal 2 (Frontend)
     npm run dev
+
+    # Terminal 3 (Websocket Server)
+    php artisan reverb:start
+
+    # Terminal 4 (Antrean Data Sensor)
+    php artisan queue:work
     ```
     
-    atau gunakan:
-    ```bash
-    composer run dev
-    ```
 
-6.  **Selesai!** Buka browser dan akses `http://127.0.0.1:8000`
+7.  **Selesai!** Buka browser dan akses `http://127.0.0.1:8000`
 
 ---
 
