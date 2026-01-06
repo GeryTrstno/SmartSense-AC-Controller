@@ -45,7 +45,7 @@
 
 | **Landing Page** | **Main Dashboard** | **Device Control** |
 | :---: | :---: | :---: |
-| <img src="public/screenshots/landing-page.png" width="400" /> | <img src="public/screenshots/dashboard.png" width="400" /> | <img src="public/screenshots/control.png" width="400" /> |
+| <img src="Web-Development/public/screenshots/landing-page.png" width="400" /> | <img src="Web-Development/public/screenshots/dashboard.png" width="400" /> | <img src="Web-Development/public/screenshots/control.png" width="400" /> |
 | *Halaman depan modern untuk konversi user.* | *Monitoring Suhu, Lembab, dan Gerakan secara real-time.* | *Pusat kendali perangkat keras (IR Control).* |
 
 <br />
