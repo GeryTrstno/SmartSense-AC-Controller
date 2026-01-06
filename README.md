@@ -5,7 +5,7 @@
 
 ## 📖 Tentang Proyek
 
-**SmartSense** adalah platform IoT terintegrasi yang dirancang untuk pemantauan lingkungan presisi tinggi dan kontrol perangkat keras jarak jauh. Proyek ini dibangun sebagai bagian dari tugas akhir Teknik Komputer, memadukan ekosistem Laravel modern dengan perangkat keras berbasis ESP32.
+**SmartSense** adalah platform IoT terintegrasi yang dirancang untuk pemantauan lingkungan presisi tinggi dan kontrol AC dari jarak jauh. Proyek ini dibangun sebagai penunjang portofolio, memadukan ekosistem Laravel modern dengan perangkat keras berbasis ESP32.
 
 > "Monitor. Automate. Control Everything."
 
