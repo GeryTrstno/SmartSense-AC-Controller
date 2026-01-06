@@ -6,6 +6,9 @@ use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets;
+use Inertia\Inertia;
+use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Request;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -25,5 +28,18 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        //
+        $exceptions->respond(function (Response $response, Throwable $exception, Request $request) {
+        // Daftar status code yang ingin kita kustomisasi
+        $statusCodes = [404, 500, 503, 403, 419];
+
+        if (in_array($response->getStatusCode(), $statusCodes)) {
+            return Inertia::render('error', [
+                'status' => $response->getStatusCode(),
+            ])
+            ->toResponse($request)
+            ->setStatusCode($response->getStatusCode());
+        }
+
+        return $response;
+    });
     })->create();
